@@ -12,8 +12,8 @@ Resources:
       Timeout: 300
       Environment:
         Variables: 
-          TELEGRAM_TOKEN: '<123456789:YOURTOKEN'
-          TELEGRAM_CHAT: 'YOURCHAT'
+          TELEGRAM_TOKEN: '<YOUR:TELEGRAMTOKEN>'
+          TELEGRAM_CHAT: '<YOURCHAT>'
   EventRule: 
     Type: "AWS::Events::Rule"
     Properties: 

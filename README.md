@@ -9,26 +9,33 @@ Model.
 
 ### Requirements
  1. Python 3
- 2. AWS account
+ 2. AWS account with sufficient permissions for S3, IAM, EC2, Lambda, Cloudwatch.
+ 3. [AWS SAM Local (cli)](https://github.com/awslabs/aws-sam-local)
+    * requires docker to be installed. 
+ 4. [A telegram bot joined to a (group) conversation](https://core.telegram.org/bots#creating-a-new-bot)
 
 ###
-Install pip requirements:
+
+**Install pip requirements to vendored sub-folder:**
 
 ```
 pip install -r requirements.txt -t vendored
 ```
 
-Testing locally:
+**Testing locally:**
 
 ```
 echo '{"message": "Hey, this is a fake cloudwatch message!" }' | sam local invoke "hello"
 ```
 
-Deploy to AWS:
+**Deploy to AWS:**
 
 ```
+# Package and send to S3
 sam package --template-file template.yaml --s3-bucket <S3 Bucket Name> --output-template-file packaged.yaml --debug
-sam deploy --template-file packaged.yaml --stack-name 'lambda-telegram' --capabilities CAPABILITY_IAM
+
+# Deploy cloudwatch stack
+sam deploy --template-file packaged.yaml --stack-name <Cloudwatch stack name> --capabilities CAPABILITY_IAM
 ```
 
 ### P.S. 
