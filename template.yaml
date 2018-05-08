@@ -15,10 +15,11 @@ Resources:
           TELEGRAM_TOKEN: '<YOUR:TELEGRAMTOKEN>'
           TELEGRAM_CHAT: '<YOURCHAT>'
       Events:
-        Type: CloudWatchEvent
-        Properties:
-          Pattern:
-            source: 
-              - "aws.ec2"
-            detail-type: 
-              - "EC2 Instance State-change Notification"
+        CloudWatchTrigger:
+          Type: CloudWatchEvent
+          Properties:
+            Pattern:
+              source:
+                - "aws.ec2"
+              detail-type: 
+                - "EC2 Instance State-change Notification"
