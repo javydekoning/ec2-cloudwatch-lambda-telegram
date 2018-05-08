@@ -14,31 +14,11 @@ Resources:
         Variables: 
           TELEGRAM_TOKEN: '<YOUR:TELEGRAMTOKEN>'
           TELEGRAM_CHAT: '<YOURCHAT>'
-  EventRule: 
-    Type: "AWS::Events::Rule"
-    Properties: 
-      Description: "Cloudwatch event rule that will invoke the lambda function"
-      EventPattern: 
-        source: 
-          - "aws.ec2"
-        detail-type: 
-          - "EC2 Instance State-change Notification"
-      State: "ENABLED"
-      Targets: 
-        - 
-          Arn: 
-            Fn::GetAtt: 
-              - "msgTelegramBot"
-              - "Arn"
-          Id: 'msgTelegramBotV1'
-  PermissionForEventsToInvokeLambda: 
-    Type: "AWS::Lambda::Permission"
-    Properties: 
-      FunctionName: 
-        Ref: "msgTelegramBot"
-      Action: "lambda:InvokeFunction"
-      Principal: "events.amazonaws.com"
-      SourceArn: 
-        Fn::GetAtt: 
-          - "EventRule"
-          - "Arn"
+      Events:
+        Type: CloudWatchEvent
+        Properties:
+          Pattern:
+            source: 
+              - "aws.ec2"
+            detail-type: 
+              - "EC2 Instance State-change Notification"
