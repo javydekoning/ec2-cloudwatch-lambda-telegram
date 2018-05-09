@@ -19,7 +19,7 @@ def msgTelegramBot(event, context):
         response   = "*Received cloudwatch event*\n\n```\n{}\n```".format(res)
         data       = {"text": response.encode("utf8"), "chat_id": CHAT , "parse_mode": "Markdown"}
         
-        LOGGER.debug('Sending to telegram: {}'.format(response))
+        LOGGER.info('Sending to telegram: {}'.format(response))
 
         #Send data:
         url = BASE_URL + "/sendMessage"
